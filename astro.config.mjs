@@ -4,10 +4,14 @@ import starlight from '@astrojs/starlight';
 
 // https://astro.build/config
 export default defineConfig({
+	 site: 'https://arc-v2-ai.github.io',
+  base: '/ARC-V2-Docs',
+
 	integrations: [
 		starlight({
-			title: 'My Docs',
-			social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/withastro/starlight' }],
+			title: 'ARC-V2 Documentation',
+			description: 'Official documentation for the ARC-V2 ecosystem.',
+			social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/ARC-V2-AI' }],
 			sidebar: [
 				{
 					label: 'Guides',
