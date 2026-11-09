@@ -4,27 +4,44 @@ import starlight from '@astrojs/starlight';
 
 // https://astro.build/config
 export default defineConfig({
-	 site: 'https://arc-v2-ai.github.io',
+  // GitHub Pages project-site URL for ARC-V2-Docs.
+  site: 'https://arc-v2-ai.github.io',
   base: '/ARC-V2-Docs',
 
-	integrations: [
-		starlight({
-			title: 'ARC-V2 Documentation',
-			description: 'Official documentation for the ARC-V2 ecosystem.',
-			social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/ARC-V2-AI' }],
-			sidebar: [
-				{
-					label: 'Guides',
-					items: [
-						// Each item here is one entry in the navigation menu.
-						{ label: 'Example Guide', slug: 'guides/example' },
-					],
-				},
-				{
-					label: 'Reference',
-					items: [{ autogenerate: { directory: 'reference' } }],
-				},
-			],
-		}),
-	],
+  integrations: [
+    starlight({
+      title: 'ARC V2 Documentation',
+      description:
+        'Official documentation for the ARC-V2 ecosystem.',
+
+      logo: {
+        src: './src/assets/arc-mark.svg',
+        alt: 'ARC V2',
+      },
+      favicon: '/favicon.svg',
+
+      social: [
+        {
+          icon: 'github',
+          label: 'GitHub',
+          href: 'https://github.com/ARC-V2-AI',
+        },
+      ],
+
+      // Generates direct links to edit documentation pages in the docs repo.
+      editLink: {
+        baseUrl: 'https://github.com/ARC-V2-AI/ARC-V2-Docs/edit/main/',
+      },
+
+      lastUpdated: true,
+      customCss: ['./src/styles/arc-theme.css'],
+
+      // Keep the framing of code blocks crisp and consistent with the site.
+      expressiveCode: {
+        styleOverrides: {
+          borderRadius: '3px',
+        },
+      },
+    }),
+  ],
 });

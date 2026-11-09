@@ -1,0 +1,512 @@
+/*
+ * ARC V2 — Starlight theme
+ * Visual source: ARC-V2-AI landing page (warm graphite / field notes).
+ * No external fonts, images, or runtime dependencies are required.
+ */
+
+/* -------------------------------------------------------------------------- */
+/* Brand tokens                                                               */
+/* -------------------------------------------------------------------------- */
+:root {
+  color-scheme: dark;
+
+  --arc-canvas: #171815;
+  --arc-surface: #1e201c;
+  --arc-surface-raised: #242720;
+  --arc-surface-hover: #2a2e26;
+  --arc-text: #f0f1e9;
+  --arc-muted: #b0b3a9;
+  --arc-faint: #85897f;
+  --arc-border: #383a34;
+  --arc-border-strong: #51564a;
+  --arc-accent: #9bce88;
+  --arc-accent-strong: #17a579;
+  --arc-mint: #a1e7c7;
+  --arc-amber: #d9b873;
+  --arc-green: #91c97d;
+  --arc-danger: #d8937f;
+
+  /* Starlight's semantic palette: dark mode is the root theme. */
+  --sl-color-white: var(--arc-text);
+  --sl-color-black: var(--arc-canvas);
+  --sl-color-gray-1: #e2e4da;
+  --sl-color-gray-2: var(--arc-muted);
+  --sl-color-gray-3: var(--arc-faint);
+  --sl-color-gray-4: #62665c;
+  --sl-color-gray-5: var(--arc-border);
+  --sl-color-gray-6: var(--arc-surface-raised);
+  --sl-color-gray-7: var(--arc-surface);
+
+  --sl-color-bg: var(--arc-canvas);
+  --sl-color-bg-nav: rgba(23, 24, 21, 0.96);
+  --sl-color-bg-sidebar: #191a17;
+  --sl-color-hairline: var(--arc-border);
+  --sl-color-hairline-light: #30342c;
+
+  --sl-color-accent-low: #303d2b;
+  --sl-color-accent: var(--arc-accent);
+  --sl-color-accent-high: #c8e4b9;
+
+  /* Starlight callout/badge colors, adapted to ARC's restrained palette. */
+  --sl-color-blue-low: #303d2b;
+  --sl-color-blue: var(--arc-accent);
+  --sl-color-blue-high: #c8e4b9;
+  --sl-color-green-low: #283924;
+  --sl-color-green: var(--arc-green);
+  --sl-color-green-high: #c4e8b4;
+  --sl-color-orange-low: #41351d;
+  --sl-color-orange: var(--arc-amber);
+  --sl-color-orange-high: #f0d49b;
+  --sl-color-red-low: #422922;
+  --sl-color-red: var(--arc-danger);
+  --sl-color-red-high: #f2b4a4;
+
+  --sl-font: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --sl-font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  --sl-content-width: 52rem;
+  --sl-sidebar-width: 18rem;
+  --sl-nav-height: 4.75rem;
+}
+
+/* A warm light variant keeps the same identity if the Starlight theme switch
+   is used. The supplied landing page itself is dark-first. */
+:root[data-theme='light'] {
+  color-scheme: light;
+
+  --arc-canvas: #f3f4ed;
+  --arc-surface: #ffffff;
+  --arc-surface-raised: #e9ece3;
+  --arc-surface-hover: #e1e7d9;
+  --arc-text: #22251f;
+  --arc-muted: #51564b;
+  --arc-faint: #747a6d;
+  --arc-border: #d2d7ca;
+  --arc-border-strong: #b6c0aa;
+  --arc-accent: #4f7e40;
+  --arc-accent-strong: #167b5d;
+  --arc-mint: #267d62;
+  --arc-amber: #8a6726;
+  --arc-green: #4d7f3d;
+  --arc-danger: #a24d3b;
+
+  --sl-color-white: var(--arc-text);
+  --sl-color-black: var(--arc-canvas);
+  --sl-color-gray-1: #262a23;
+  --sl-color-gray-2: #454a40;
+  --sl-color-gray-3: #697064;
+  --sl-color-gray-4: #8b9185;
+  --sl-color-gray-5: #cbd1c3;
+  --sl-color-gray-6: #e5e9df;
+  --sl-color-gray-7: #eff1e9;
+
+  --sl-color-bg: var(--arc-canvas);
+  --sl-color-bg-nav: rgba(243, 244, 237, 0.96);
+  --sl-color-bg-sidebar: #ecefe6;
+  --sl-color-hairline: var(--arc-border);
+  --sl-color-hairline-light: #e0e4d9;
+
+  --sl-color-accent-low: #e3eddc;
+  --sl-color-accent: var(--arc-accent);
+  --sl-color-accent-high: #29492c;
+
+  --sl-color-blue-low: #e3eddc;
+  --sl-color-blue: var(--arc-accent);
+  --sl-color-blue-high: #29492c;
+  --sl-color-green-low: #e5efdf;
+  --sl-color-green: var(--arc-green);
+  --sl-color-green-high: #29492c;
+  --sl-color-orange-low: #f4ebd7;
+  --sl-color-orange: var(--arc-amber);
+  --sl-color-orange-high: #5e4518;
+  --sl-color-red-low: #f7e7e1;
+  --sl-color-red: var(--arc-danger);
+  --sl-color-red-high: #6b2d22;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Global surface and typography                                              */
+/* -------------------------------------------------------------------------- */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--sl-nav-height) + 1rem);
+  background: var(--arc-canvas);
+}
+
+body {
+  position: relative;
+  isolation: isolate;
+  background: var(--arc-canvas);
+  color: var(--arc-text);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+body::before {
+  position: fixed;
+  z-index: -1;
+  inset: 0;
+  content: "";
+  pointer-events: none;
+  opacity: 0.12;
+  background:
+    linear-gradient(180deg, rgba(143, 174, 111, 0.035), transparent 44%),
+    repeating-linear-gradient(0deg, rgba(234, 239, 220, 0.012) 0 1px, transparent 1px 4px);
+}
+
+:root[data-theme='light'] body::before {
+  opacity: 0.18;
+  background: linear-gradient(180deg, rgba(112, 145, 91, 0.035), transparent 48%);
+}
+
+::selection {
+  background: rgba(23, 165, 121, 0.32);
+  color: #fff;
+}
+
+:focus-visible {
+  outline: 2px solid var(--arc-accent);
+  outline-offset: 3px;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Header                                                                     */
+/* -------------------------------------------------------------------------- */
+header.header {
+  border-bottom: 1px solid var(--arc-border);
+  background: var(--sl-color-bg-nav);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.site-title {
+  gap: 0.7rem;
+  color: var(--arc-text);
+  font-weight: 650;
+  letter-spacing: -0.035em;
+}
+
+.site-title img {
+  width: 1.8rem;
+  height: 1.8rem;
+}
+
+starlight-menu-button button,
+starlight-theme-select select,
+site-search button,
+site-search input {
+  border-radius: 3px;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Sidebar and table of contents                                              */
+/* -------------------------------------------------------------------------- */
+.sidebar-pane {
+  border-inline-end: 1px solid var(--arc-border);
+  background: var(--sl-color-bg-sidebar);
+}
+
+.sidebar-content {
+  scrollbar-color: var(--arc-border-strong) transparent;
+}
+
+.sidebar-content a {
+  border-radius: 2px;
+  transition: color 140ms ease, background-color 140ms ease;
+}
+
+.sidebar-content a:hover {
+  color: var(--arc-text);
+  background: var(--arc-surface-raised);
+}
+
+.sidebar-content a[aria-current='page'] {
+  color: var(--sl-color-accent-high);
+  background: color-mix(in srgb, var(--arc-accent) 9%, transparent);
+  font-weight: 600;
+}
+
+.sidebar-content summary {
+  color: var(--arc-accent);
+  font-family: var(--sl-font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.right-sidebar {
+  border-inline-start: 1px solid var(--arc-border);
+}
+
+starlight-toc a,
+.right-sidebar a {
+  color: var(--arc-faint);
+}
+
+starlight-toc a[aria-current='true'],
+.right-sidebar a[aria-current='true'] {
+  color: var(--arc-accent);
+}
+
+/* -------------------------------------------------------------------------- */
+/* Main content                                                               */
+/* -------------------------------------------------------------------------- */
+.main-pane {
+  background: transparent;
+}
+
+.content-panel {
+  border-top-color: var(--arc-border);
+}
+
+.sl-markdown-content {
+  line-height: 1.8;
+}
+
+.sl-markdown-content :is(h1, h2, h3, h4, h5, h6) {
+  color: var(--arc-text);
+  font-weight: 600;
+  letter-spacing: -0.04em;
+  text-wrap: balance;
+}
+
+.sl-markdown-content h1 {
+  letter-spacing: -0.055em;
+}
+
+.sl-markdown-content h2 {
+  padding-bottom: 0.55rem;
+  border-bottom: 1px solid var(--arc-border);
+}
+
+.sl-markdown-content a:not([class]) {
+  color: var(--sl-color-accent-high);
+  text-decoration-color: color-mix(in srgb, var(--arc-accent) 45%, transparent);
+  text-underline-offset: 0.2em;
+}
+
+.sl-markdown-content a:not([class]):hover {
+  color: var(--arc-accent);
+  text-decoration-color: currentColor;
+}
+
+.sl-markdown-content :not(pre) > code {
+  padding: 0.12em 0.34em;
+  border: 1px solid var(--arc-border);
+  border-radius: 2px;
+  background: var(--arc-surface-raised);
+  color: var(--sl-color-accent-high);
+  font-size: 0.88em;
+}
+
+.sl-markdown-content pre {
+  border-radius: 3px;
+}
+
+.expressive-code {
+  --ec-brdRad: 3px;
+}
+
+.sl-markdown-content table {
+  border-color: var(--arc-border);
+  font-size: 0.94em;
+}
+
+.sl-markdown-content th {
+  background: var(--arc-surface-raised);
+  color: var(--arc-text);
+}
+
+.sl-markdown-content :is(th, td) {
+  border-color: var(--arc-border);
+}
+
+.sl-markdown-content blockquote {
+  border-inline-start-color: var(--arc-accent);
+  color: var(--arc-muted);
+}
+
+.sl-markdown-content hr {
+  border-color: var(--arc-border);
+}
+
+/* -------------------------------------------------------------------------- */
+/* Starlight cards, asides, badges, and page navigation                      */
+/* -------------------------------------------------------------------------- */
+.card,
+.sl-link-card {
+  border: 1px solid var(--arc-border);
+  border-radius: 3px;
+  background: var(--arc-surface);
+  box-shadow: none;
+  transition: border-color 160ms ease, background-color 160ms ease, transform 160ms ease;
+}
+
+.card:hover,
+.sl-link-card:hover {
+  border-color: var(--arc-border-strong);
+  background: var(--arc-surface-raised);
+}
+
+.sl-link-card:hover {
+  transform: translateY(-1px);
+}
+
+.starlight-aside {
+  border-radius: 3px;
+  box-shadow: none;
+}
+
+.starlight-aside--tip {
+  --sl-color-asides-text-accent: var(--arc-accent);
+}
+
+.starlight-aside--caution {
+  --sl-color-asides-text-accent: var(--arc-amber);
+}
+
+.starlight-aside--danger {
+  --sl-color-asides-text-accent: var(--arc-danger);
+}
+
+.starlight-aside--note {
+  --sl-color-asides-text-accent: var(--arc-mint);
+}
+
+.pagination-links a {
+  border-color: var(--arc-border);
+  border-radius: 3px;
+  background: var(--arc-surface);
+}
+
+.pagination-links a:hover {
+  border-color: var(--arc-border-strong);
+  background: var(--arc-surface-raised);
+}
+
+/* -------------------------------------------------------------------------- */
+/* Optional ARC-specific utility classes for MDX pages                        */
+/* -------------------------------------------------------------------------- */
+.arc-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  color: var(--arc-accent);
+  font: 0.7rem/1.5 var(--sl-font-mono);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.arc-eyebrow::before {
+  width: 1.4rem;
+  height: 1px;
+  background: currentColor;
+  content: "";
+}
+
+.arc-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.3rem 0.55rem;
+  border: 1px solid #41493a;
+  border-radius: 3px;
+  background: rgba(143, 174, 111, 0.04);
+  color: #b5c6a5;
+  font: 0.65rem/1.4 var(--sl-font-mono);
+  letter-spacing: 0.055em;
+  text-transform: uppercase;
+}
+
+.arc-status::before {
+  width: 6px;
+  height: 6px;
+  background: var(--arc-green);
+  content: "";
+}
+
+.arc-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.2rem 0.45rem;
+  border: 1px solid #3f6040;
+  border-radius: 2px;
+  background: rgba(124, 171, 99, 0.075);
+  color: #b4d6a2;
+  font: 0.68rem/1.4 var(--sl-font-mono);
+}
+
+.arc-pill--planned {
+  border-color: #5b5035;
+  background: rgba(190, 155, 78, 0.06);
+  color: #d9c18d;
+}
+
+.arc-contract {
+  padding: 0.8rem 0.9rem;
+  border: 1px solid #3c4235;
+  border-radius: 3px;
+  background: #1e211b;
+  color: #d3d7c9;
+  font: 0.8rem/1.7 var(--sl-font-mono);
+}
+
+.arc-safety-note {
+  padding: 0.75rem 0.9rem;
+  border-inline-start: 2px solid #d0b06e;
+  background: rgba(190, 155, 78, 0.035);
+  color: #b8b9ad;
+}
+
+:root[data-theme='light'] .arc-status {
+  border-color: #b8c9ac;
+  background: #edf3e8;
+  color: #46603b;
+}
+
+:root[data-theme='light'] .arc-pill {
+  border-color: #a8c49d;
+  background: #edf4e9;
+  color: #466b3c;
+}
+
+:root[data-theme='light'] .arc-pill--planned {
+  border-color: #d7c69e;
+  background: #f7f1e4;
+  color: #795e25;
+}
+
+:root[data-theme='light'] .arc-contract {
+  border-color: #d0d8c5;
+  background: #edf0e8;
+  color: #31372e;
+}
+
+:root[data-theme='light'] .arc-safety-note {
+  background: #f7f1e4;
+  color: #62583f;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Responsive and reduced-motion behavior                                    */
+/* -------------------------------------------------------------------------- */
+@media (max-width: 50rem) {
+  :root {
+    --sl-content-width: 100%;
+    --sl-sidebar-width: 16rem;
+  }
+
+  .right-sidebar {
+    border-inline-start: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

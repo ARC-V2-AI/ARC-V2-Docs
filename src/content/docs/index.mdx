@@ -1,40 +1,95 @@
 ---
-title: Welcome to Starlight
-description: Get started building your docs site with Starlight.
-template: splash # Remove or comment out this line to display the site sidebar on this page.
+title: ARC V2 Documentation
+description: Documentation for installing, configuring, operating and extending ARC V2.
+template: splash
+tableOfContents: false
 hero:
-  tagline: Congrats on setting up a new Starlight project!
-  image:
-    file: ../../assets/houston.webp
+  title: ARC V2 Documentation
+  tagline: Building local AI, one problem at a time.
   actions:
-    - text: Example Guide
-      link: /guides/example/
+    - text: Get started
+      link: /getting-started/
       icon: right-arrow
-    - text: Read the Starlight docs
-      link: https://starlight.astro.build
+    - text: GitHub organization
+      link: https://github.com/ARC-V2-AI
       icon: external
       variant: minimal
 ---
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
+import { Card, CardGrid } from "@astrojs/starlight/components";
 
-## Next steps
+Technical documentation for ARC V2.
 
-<CardGrid stagger>
-	<Card title="Update content" icon="pencil">
-		Edit `src/content/docs/index.mdx` to see this page change.
-	</Card>
-	<Card title="Change page layout" icon="document">
-		Delete `template: splash` in `src/content/docs/index.mdx` to display a
-		sidebar on this page.
-	</Card>
-	<Card title="Add new content" icon="add-document">
-		Add Markdown or MDX files to `src/content/docs` to create new pages.
-	</Card>
-	<Card title="Configure your site" icon="setting">
-		Edit your `sidebar` and other config in `astro.config.mjs`.
-	</Card>
-	<Card title="Read the docs" icon="open-book">
-		Learn more in [the Starlight Docs](https://starlight.astro.build/).
-	</Card>
+Find instructions for setting up the Core, configuring your environment, understanding the system and developing independent services.
+
+## Getting started
+
+<CardGrid>
+  <Card title="Getting Started" href="/getting-started/" icon="rocket">
+    Install ARC V2 Core, prepare the environment and run your first ARC
+    instance.
+  </Card>
+  <Card
+    title="Configuration"
+    href="/configuration/environment-variables/"
+    icon="setting"
+  >
+    Configure ARC V2 through environment variables, including runtime paths and
+    system settings.
+  </Card>
+  <Card
+    title="Building a Service"
+    href="/guides/building-a-service/"
+    icon="puzzle"
+  >
+    Learn how to create, package and install an independently managed ARC V2
+    service.
+  </Card>
 </CardGrid>
+
+## Further documentation
+
+<CardGrid>
+  <Card title="Architecture" href="/architecture/" icon="network">
+    Understand the Core, component responsibilities, service lifecycle and
+    communication architecture.
+  </Card>
+  <Card title="Development" href="/development/" icon="code">
+    Explore development interfaces, service contracts and integration patterns.
+  </Card>
+  <Card title="Operation" href="/operation/" icon="terminal">
+    Learn about startup, installation, supervision and runtime management.
+  </Card>
+</CardGrid>
+
+## About the project
+
+ARC V2 is an independent open-source project. The website contains information about its origins, motivation and development direction.
+
+<CardGrid>
+  <Card
+    title="Project website"
+    href="https://arc-v2-ai.github.io/"
+    icon="external"
+  >
+    Project overview, background, history and the ideas behind ARC V2.
+  </Card>
+  <Card
+    title="GitHub organization"
+    href="https://github.com/ARC-V2-AI"
+    icon="github"
+  >
+    Browse the source code, repositories and ongoing development.
+  </Card>
+  <Card
+    title="ARC V2 Core"
+    href="https://github.com/ARC-V2-AI/ARC-V2-Core"
+    icon="code"
+  >
+    Explore the operating foundation and its implementation.
+  </Card>
+</CardGrid>
+
+---
+
+<small>ARC V2 · Technical Documentation · Under active development</small>

@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none" role="img" aria-labelledby="title">
+  <title id="title">ARC V2 mark</title>
+  <g stroke="#9BCE88" stroke-width="1.6" stroke-linejoin="round">
+    <rect x="5" y="5" width="38" height="38" rx="1" />
+    <rect x="12" y="12" width="24" height="24" rx="1" />
+  </g>
+  <rect x="20" y="20" width="8" height="8" fill="#9BCE88" />
+</svg>
